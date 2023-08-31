@@ -17,7 +17,7 @@ const createTask = async (req, res) => {
     const task = new Task({
         title: req.body.title,
         description: req.body.description,
-        status: 'To Do',
+        category: req.body.category,
     });
 
     try {

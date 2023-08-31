@@ -6,7 +6,7 @@ import UpdateModal from './UpdateModal';
 
 const TaskCard = ({ task }) => {
 
-    const { title, description, status } = task;
+    const { title, description, category } = task;
     const { deleteTaskAction, setMessage } = useGlobalContext();
     const [showUpdateModal, setShowUpdateModal] = useState(false);
 
@@ -36,10 +36,10 @@ const TaskCard = ({ task }) => {
         <>
 
             <div className="my-4 d-flex justify-content-center align-items-center mx-2">
-                <Card className="shadow rounded-4 border-0" style={{ width: "30rem" }}>
+                <Card className="shadow rounded-4 border-0 card-bg" style={{ width: "30rem" }}>
 
-                    <Card.Body className="my-2 mx-2" style={{ position: "relative" }}>
-                        <Card.Title className="">{title}</Card.Title>
+                    <Card.Body className="my-3 mx-2" style={{ position: "relative" }}>
+                        <Card.Title className="fs-6">{title}</Card.Title>
                         <Card.Text className="" style={{ fontSize: "14px" }}>{description}</Card.Text>
                     </Card.Body>
 
@@ -54,13 +54,14 @@ const TaskCard = ({ task }) => {
                     </Card.Footer>
                     <span
                         style={{ position: "absolute", top: 5, right: 5 }}
-                        className="badge text-dark rounded-pill bg-warning"
+                        className="badge text-dark rounded-pill card-badge fw-semibold font-monospace"
                     >
-                        {status}
+                        {category}
                     </span>
                 </Card>
 
             </div>
+
             {/* Update Modal */}
             <UpdateModal show={showUpdateModal} handleClose={handleCloseUpdateModal} task={task} handleUpdate={handleUpdate} />
         </>

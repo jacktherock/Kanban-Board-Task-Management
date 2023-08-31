@@ -1,11 +1,37 @@
 import React from 'react';
 import { useGlobalContext } from '../context/TasksContext';
-import { Modal } from 'react-bootstrap';
+import { Modal, Form, Button } from 'react-bootstrap';
 import { createTask } from '../api/api';
-import TaskForm from './TaskForm';
+import { categoryOptions } from '../data/data';
+import FieldError from './UI/FieldError';
 
 const TaskModal = ({ show, handleClose }) => {
-    const { title, description, formValid, resetForm, createTaskAction, setMessage } = useGlobalContext();
+    const { title, description, category, formValid, resetForm, createTaskAction, setMessage, onFocusHandler, onBlurHandler, valueChangeHandler, categoryHandler } = useGlobalContext();
+
+    const fields = [
+        {
+            id: "title",
+            name: "title",
+            placeholder: "Title",
+            label: "Title of task",
+            value: title.value,
+            touched: title.touched,
+            hasError: title.hasError,
+            error: title.error,
+            msgType: title.msgType,
+        },
+        {
+            id: "description",
+            name: "description",
+            placeholder: "Description",
+            label: "Description of task",
+            value: description.value,
+            touched: description.touched,
+            hasError: description.hasError,
+            error: description.error,
+            msgType: description.msgType,
+        },
+    ]
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,6 +44,7 @@ const TaskModal = ({ show, handleClose }) => {
         const taskData = {
             title: title.value,
             description: description.value,
+            category: category.value
         };
 
         createTask(taskData).then((response) => {
@@ -28,6 +55,7 @@ const TaskModal = ({ show, handleClose }) => {
                 setMessage(true, "error", "Something went wrong!");
             }
         });
+
         resetForm();
     }
 
@@ -38,10 +66,64 @@ const TaskModal = ({ show, handleClose }) => {
             </Modal.Header>
             <Modal.Body>
 
-                <TaskForm handleSubmit={handleSubmit} />
+                <Form onSubmit={handleSubmit}>
+                    {
+                        fields.map((field) => {
+
+                            const { id, name, placeholder, label, value, touched, hasError, error, msgType } = field;
+
+                            return (
+                                <Form.Group key={id} className="mb-3">
+                                    <Form.Label className="ps-2 p-0 m-0 fw-medium" style={{ fontSize: "13px" }}>{label}</Form.Label>
+                                    <Form.Control
+                                        size="sm"
+                                        as="textarea"
+                                        rows={2}
+                                        name={name}
+                                        type="text"
+                                        placeholder={placeholder}
+                                        value={value}
+                                        onChange={valueChangeHandler}
+                                        onFocus={onFocusHandler}
+                                        onBlur={onBlurHandler}
+                                        className="rounded-3 input-field-bg position-relative"
+                                    />
+                                    <FieldError
+                                        touched={touched}
+                                        hasError={hasError}
+                                        error={error}
+                                        msgType={msgType}
+                                    />
+                                </Form.Group>
+                            )
+                        }
+                        )}
+                    <Form.Group className="mb-2">
+                        <Form.Label className="ps-2 p-0 m-0 fw-medium" style={{ fontSize: "13px" }}>Status of task</Form.Label>
+                        <Form.Select
+                            size="sm"
+                            id="category"
+                            name="category"
+                            value={category.value}
+                            onChange={categoryHandler}
+                            className="rounded-3 input-field-bg "
+                        >
+                            <option value="">Select category</option>
+                            {categoryOptions.map(option => (
+                                <option key={option.value} value={option.label}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </Form.Select>
+                    </Form.Group>
+
+                    <Button type="submit" onClick={handleSubmit} className="btn btn-sm float-end rounded-3 btn-form border-0">
+                        Add Task
+                    </Button>
+                </Form>
 
             </Modal.Body>
-        </Modal>
+        </Modal >
     );
 };
 

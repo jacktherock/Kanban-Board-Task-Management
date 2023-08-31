@@ -4,9 +4,9 @@ import { Container, Navbar } from 'react-bootstrap';
 const header = () => {
     return (
 
-        <Navbar expand="lg" sticky="top" bg="dark" data-bs-theme="dark" className="bg-body-tertiary">
+        <Navbar expand="lg" sticky="top" bg="dark" data-bs-theme="dark" className="bg-body-tertiary nav-bg" >
             <Container>
-                <Navbar.Brand className="text-center">Kanban Board</Navbar.Brand>
+                <Navbar.Brand href="/" className="text-center fw-semibold">Kanban Board</Navbar.Brand>
             </Container>
         </Navbar>
 

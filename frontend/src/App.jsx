@@ -7,11 +7,11 @@ import Header from './components/UI/Header';
 const App = () => {
 
   return (
-    <>
+    <div className="bg-dark">
       <Header />
       <Message />
       <HomePage />
-    </>
+    </div>
   )
 }
 

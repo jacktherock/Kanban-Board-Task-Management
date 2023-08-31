@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '../context/TasksContext';
 import { Form, Modal, Button } from 'react-bootstrap';
 import { updateTaskById } from '../api/api';
 import FieldError from './UI/FieldError';
+import { categoryOptions } from '../data/data';
 
 const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
-    const { title, description, formValid, resetForm, setMessage, onFocusHandler, valueChangeHandler, onBlurHandler } = useGlobalContext();
+    const { title, description, category, formValid, resetForm, setMessage, onFocusHandler, valueChangeHandler, onBlurHandler } = useGlobalContext();
 
     const [titleValue, setTitleValue] = useState(task.title);
     const [descriptionValue, setDescriptionValue] = useState(task.description);
+    const [categoryValue, setCategoryValue] = useState(task.category);
 
     // useEffect(() => {
     //     setTitleValue(task.title);
     //     setDescriptionValue(task.description);
+    //     setCategoryValue(task.category);
     // }, [task]);
 
     const handleValueChange = (e, setValue) => {
@@ -32,6 +35,7 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
             _id: task._id,
             title: titleValue,
             description: descriptionValue,
+            category: categoryValue
         };
 
         updateTaskById(updatedTask).then((response) => {
@@ -51,7 +55,7 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
             id: "title",
             name: "title",
             placeholder: "Title",
-            label: "Title",
+            label: "Title of task",
             value: titleValue,
             touched: title.touched,
             hasError: title.hasError,
@@ -63,7 +67,7 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
             id: "description",
             name: "description",
             placeholder: "Description",
-            label: "Description",
+            label: "Description of task",
             value: descriptionValue,
             touched: description.touched,
             hasError: description.hasError,
@@ -87,7 +91,7 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
 
                             return (
                                 <Form.Group key={id} className="mb-3">
-                                    <Form.Label className="ps-2 p-0 m-0 fw-semibold" style={{ fontSize: "13px" }}>{label}</Form.Label>
+                                    <Form.Label className="ps-2 p-0 m-0 fw-medium" style={{ fontSize: "13px" }}>{label}</Form.Label>
                                     <Form.Control
                                         size="sm"
                                         as="textarea"
@@ -99,7 +103,7 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
                                         value={value}
                                         onChange={handleValueChange}
                                         onBlur={onBlurHandler}
-                                        className="rounded-3"
+                                        className="rounded-3 input-field-bg "
                                     />
                                     <FieldError
                                         touched={touched}
@@ -111,12 +115,30 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
                             )
                         }
                         )}
-                    <Button variant="success" type="submit" className="btn btn-sm float-end rounded-3">
+                    <Form.Group className="mb-2">
+                        <Form.Label className="ps-2 p-0 m-0 fw-medium" style={{ fontSize: "13px" }}> Status of task</Form.Label>
+                        <Form.Select
+                            size="sm"
+                            id="category"
+                            name="category"
+                            value={categoryValue}
+                            onChange={(e) => { handleValueChange(e, setCategoryValue) }}
+                            className="rounded-3 input-field-bg "
+                        >
+                            <option value="" >Select category</option>
+                            {categoryOptions.map(option => (
+                                <option key={option.value} value={option.label}>
+                                    {option.label}
+                                </option>
+                            ))}
+                        </Form.Select>
+                    </Form.Group>
+                    <Button type="submit" className="btn btn-sm float-end rounded-3 btn-form border-0">
                         Update Task
                     </Button>
                 </Form>
             </Modal.Body>
-        </Modal>
+        </Modal >
     );
 };
 

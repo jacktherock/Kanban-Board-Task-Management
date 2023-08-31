@@ -62,8 +62,12 @@ const TasksProvider = ({ children }) => {
         dispatch({ type: "DELETE_TASK", payload: taskId })
     }
 
+    const categoryHandler = (e) => {
+        dispatch({ type: "SELECT_CATEGORY", payload: e.target.value });
+    };
+
     return (
-        <TasksContext.Provider value={{ ...state, setMessage, createTaskAction, deleteTaskAction, fetchTasksAction, onFocusHandler, onBlurHandler, valueChangeHandler, resetForm }
+        <TasksContext.Provider value={{ ...state, setMessage, createTaskAction, deleteTaskAction, fetchTasksAction, onFocusHandler, onBlurHandler, valueChangeHandler, categoryHandler, resetForm }
         }>
             {children}
         </TasksContext.Provider>

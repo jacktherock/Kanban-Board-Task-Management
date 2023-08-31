@@ -5,6 +5,7 @@ const initialState = {
     formValid: false,
     error: { isError: false, message: "", type: "error" },
     tasks: [],
+    category: { value: '', touched: false, hasError: false, error: "", msgType: "danger" },
     isLoading: true
 };
 
@@ -99,6 +100,15 @@ const tasksReducer = (state, action) => {
                 ...state,
                 tasks: state.tasks.map(task => task.id === action.payload.id ? action.payload : task),
             };
+
+        case "SELECT_CATEGORY":
+            return {
+                ...state,
+                category: {
+                    ...state.category,
+                    value: action.payload
+                }
+            }
 
         default:
             return state;

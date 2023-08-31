@@ -43,10 +43,3 @@ export const updateTaskStatus = async (task) => {
     return updatedTask;
 }
 
-export const deleteTaskById = async (id) => {
-    const deletedTask = await deleteTask(id);
-    return deletedTask;
-}
-
-
-
