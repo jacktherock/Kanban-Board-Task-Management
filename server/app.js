@@ -12,11 +12,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.raw())
 app.use(bodyParser.text())
 
-// app.use(cors({
-//     origin: "*"
-// }));
-
-app.use(cors())
+app.use(cors({
+    origin: "*"
+}));
 
 app.use("/api", taskRoute);
 
