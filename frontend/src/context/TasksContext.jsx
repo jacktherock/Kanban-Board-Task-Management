@@ -1,7 +1,7 @@
-import React, { createContext, useReducer, useContext } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { initialState, tasksReducer } from '../reducers/TasksReducer';
+import React, { createContext, useReducer, useContext } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { initialState, tasksReducer } from "../reducers/TasksReducer";
 
 const TasksContext = createContext();
 
@@ -48,7 +48,6 @@ const TasksProvider = ({ children }) => {
         });
         toast[type](message); // shows toast message
     }
-
 
     const fetchTasksAction = (tasks) => {
         dispatch({ type: "FETCH_TASKS", payload: tasks })

@@ -1,12 +1,12 @@
-import React from 'react';
-import { useGlobalContext } from '../context/TasksContext';
-import { Modal, Form, Button } from 'react-bootstrap';
-import { createTask } from '../api/api';
-import { categoryOptions } from '../data/data';
-import FieldError from './UI/FieldError';
+import React from "react";
+import { useGlobalContext } from "../context/TasksContext";
+import { Modal, Form, Button } from "react-bootstrap";
+import { createTask } from "../api/api";
+import { categoryOptions } from "../data/data";
+import FieldError from "./UI/FieldError";
 
 const TaskModal = ({ show, handleClose }) => {
-    const { title, description, category, formValid, resetForm, createTaskAction, setMessage, onFocusHandler, onBlurHandler, valueChangeHandler, categoryHandler } = useGlobalContext();
+    const { title, description, category, resetForm, createTaskAction, setMessage, onFocusHandler, onBlurHandler, valueChangeHandler, categoryHandler } = useGlobalContext();
 
     const fields = [
         {
@@ -36,7 +36,7 @@ const TaskModal = ({ show, handleClose }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!formValid) {
+        if (title.value.trim() === "" || description.value.trim() === "" || category.value === "") {
             setMessage(true, "error", "Please fill in all the fields!");
             return;
         }
@@ -86,7 +86,7 @@ const TaskModal = ({ show, handleClose }) => {
                                         onChange={valueChangeHandler}
                                         onFocus={onFocusHandler}
                                         onBlur={onBlurHandler}
-                                        className="rounded-3 input-field-bg position-relative"
+                                        className="rounded-3 input-field-bg position-relative border-0"
                                     />
                                     <FieldError
                                         touched={touched}
@@ -106,11 +106,11 @@ const TaskModal = ({ show, handleClose }) => {
                             name="category"
                             value={category.value}
                             onChange={categoryHandler}
-                            className="rounded-3 input-field-bg "
+                            className="rounded-3 input-field-bg border-0"
                         >
                             <option value="">Select category</option>
                             {categoryOptions.map(option => (
-                                <option key={option.value} value={option.label}>
+                                <option key={option.value} value={option.label} className="bg-light">
                                     {option.label}
                                 </option>
                             ))}
@@ -123,7 +123,7 @@ const TaskModal = ({ show, handleClose }) => {
                 </Form>
 
             </Modal.Body>
-        </Modal >
+        </Modal>
     );
 };
 

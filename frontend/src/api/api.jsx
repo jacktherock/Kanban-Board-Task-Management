@@ -1,11 +1,11 @@
 import axiosClient from "./apiClient.jsx";
 
 export const getTasks = () => {
-    return axiosClient().get('tasks').then(response => response.data);
+    return axiosClient().get("tasks").then(response => response.data);
 }
 
 export const addTask = (task) => {
-    return axiosClient().post('create-task', task).then(response => response.data);
+    return axiosClient().post("create-task", task).then(response => response.data);
 }
 
 export const updateTask = (task) => {

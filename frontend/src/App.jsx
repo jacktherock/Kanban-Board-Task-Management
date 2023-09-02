@@ -1,8 +1,9 @@
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import HomePage from './pages/HomePage'
-import Message from './components/UI/Message';
-import Header from './components/UI/Header';
+import "./App.css"
+import "bootstrap/dist/css/bootstrap.min.css";
+import HomePage from "./pages/HomePage"
+import Message from "./components/UI/Message";
+import Header from "./components/UI/Header";
+import Footer from "./components/UI/Footer";
 
 const App = () => {
 
@@ -11,6 +12,7 @@ const App = () => {
       <Header />
       <Message />
       <HomePage />
+      <Footer />
     </div>
   )
 }

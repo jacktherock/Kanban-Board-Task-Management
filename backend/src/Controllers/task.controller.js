@@ -1,5 +1,5 @@
 const { Response } = require("../services/services");
-const Task = require('../models/task.model');
+const Task = require("../models/task.model");
 
 
 // get all tasks

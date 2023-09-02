@@ -15,7 +15,8 @@ input[type="number"]:focus,
 [type="password"].form-control:focus,
 [type="email"].form-control:focus,
 [type="tel"].form-control:focus,
-[contenteditable].form-control:focus {
+[contenteditable].form-control:focus,
+select.form-select:focus {
   box-shadow: inset 0 -1px 1px #ddd;
 }
 
@@ -52,7 +53,7 @@ input[type="number"]:focus,
 }
 
 .input-field-bg {
-  background-color: #FFF4CB !important;
+  background-color: #fff4cb !important;
 }
 
 .spinner-clr {

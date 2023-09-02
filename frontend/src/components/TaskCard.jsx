@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useGlobalContext } from '../context/TasksContext';
-import { Card } from 'react-bootstrap';
-import { deleteTask } from '../api/api';
-import UpdateModal from './UpdateModal';
+import React, { useState } from "react";
+import { useGlobalContext } from "../context/TasksContext";
+import { Card } from "react-bootstrap";
+import { deleteTask } from "../api/api";
+import UpdateModal from "./UpdateModal";
 
 const TaskCard = ({ task }) => {
 

@@ -1,21 +1,16 @@
-import React, { useState } from 'react';
-import TaskList from '../components/TaskList';
-import { Container, Button, Form, Row, Col } from 'react-bootstrap';
-import TaskModal from '../components/TaskModal';
-import { PlusCircle, Search } from 'lucide-react';
+import React, { useState } from "react";
+import TaskList from "../components/TaskList";
+import { Container, Button, Form, Row, Col } from "react-bootstrap";
+import TaskModal from "../components/TaskModal";
+import { PlusCircle, Search } from "lucide-react";
 
 const HomePage = () => {
 
     const [show, setShow] = useState(false);
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchQuery, setSearchQuery] = useState("");
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    const handleSearchSubmit = (e) => {
-        e.preventDefault();
-        // You can use the searchQuery here to filter tasks or perform the search action
-        // Update the TaskList component with the filtered tasks
-    };
 
     return (
         <Container className="py-4 home-bg min-vh-100" fluid>

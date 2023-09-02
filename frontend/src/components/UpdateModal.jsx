@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useGlobalContext } from '../context/TasksContext';
-import { Form, Modal, Button } from 'react-bootstrap';
-import { updateTaskById } from '../api/api';
-import FieldError from './UI/FieldError';
-import { categoryOptions } from '../data/data';
+import React, { useState, useEffect } from "react";
+import { useGlobalContext } from "../context/TasksContext";
+import { Form, Modal, Button } from "react-bootstrap";
+import { updateTaskById } from "../api/api";
+import FieldError from "./UI/FieldError";
+import { categoryOptions } from "../data/data";
 
 const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
-    const { title, description, category, formValid, resetForm, setMessage, onFocusHandler, valueChangeHandler, onBlurHandler } = useGlobalContext();
+    const { title, description, resetForm, setMessage, onFocusHandler, valueChangeHandler, onBlurHandler } = useGlobalContext();
 
     const [titleValue, setTitleValue] = useState(task.title);
     const [descriptionValue, setDescriptionValue] = useState(task.description);
@@ -26,10 +26,10 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // if (!formValid) {
-        //     setMessage(true, "error", "Please fill in all the fields!");
-        //     return;
-        // }
+        if (titleValue.trim() === "" || descriptionValue.trim() === "" || categoryValue === "") {
+            setMessage(true, "error", "Please fill in all the fields!");
+            return;
+        }
 
         const updatedTask = {
             _id: task._id,
@@ -103,7 +103,7 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
                                         value={value}
                                         onChange={handleValueChange}
                                         onBlur={onBlurHandler}
-                                        className="rounded-3 input-field-bg "
+                                        className="rounded-3 input-field-bg border-0"
                                     />
                                     <FieldError
                                         touched={touched}
@@ -123,11 +123,11 @@ const UpdateModal = ({ show, handleClose, task, handleUpdate }) => {
                             name="category"
                             value={categoryValue}
                             onChange={(e) => { handleValueChange(e, setCategoryValue) }}
-                            className="rounded-3 input-field-bg "
+                            className="rounded-3 input-field-bg border-0"
                         >
                             <option value="" >Select category</option>
                             {categoryOptions.map(option => (
-                                <option key={option.value} value={option.label}>
+                                <option key={option.value} value={option.label} className="bg-light">
                                     {option.label}
                                 </option>
                             ))}

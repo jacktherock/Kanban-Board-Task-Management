@@ -2,23 +2,22 @@
 const initialState = {
     title: { value: "", touched: false, hasError: false, error: "", msgType: "danger" },
     description: { value: "", touched: false, hasError: false, error: "", msgType: "danger" },
-    formValid: false,
     error: { isError: false, message: "", type: "error" },
     tasks: [],
-    category: { value: '', touched: false, hasError: false, error: "", msgType: "danger" },
+    category: { value: "", touched: false, hasError: false, error: "", msgType: "danger" },
     isLoading: true
 };
 
 const tasksReducer = (state, action) => {
     switch (action.type) {
 
-        case 'INPUT_FOCUSED':
+        case "INPUT_FOCUSED":
             return {
                 ...state,
                 [action.payload]: { ...state[action.payload], touched: true }
             }
 
-        case 'INPUT_BLUR':
+        case "INPUT_BLUR":
             if (action.payload.value.trim().length === 0) {
                 return {
                     ...state,
@@ -26,17 +25,16 @@ const tasksReducer = (state, action) => {
                         ...state[action.payload.key],
                         hasError: true,
                         error: `${action.payload.placeholder} field is required!`
-                    },
-                    formValid: false
+                    }
                 }
             }
 
             return {
                 ...state,
-                formValid: true
+
             };
 
-        case 'INPUT_CHANGE':
+        case "INPUT_CHANGE":
             return {
                 ...state,
                 [action.payload.key]: {
@@ -46,20 +44,7 @@ const tasksReducer = (state, action) => {
                 }
             }
 
-        case "FORM_VALID":
-            if (state.title.value.length > 0 && state.description.value.length > 0) {
-                return {
-                    ...state,
-                    formValid: true
-                }
-            }
-
-            return {
-                ...state,
-                formValid: false
-            }
-
-        case 'FORM_RESET':
+        case "FORM_RESET":
             return {
                 ...state,
                 ...initialState,

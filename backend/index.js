@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require('cors');
+const cors = require("cors");
 const app = express();
 require("dotenv").config()
 require("./src/DB/connection")
@@ -11,11 +11,11 @@ app.use(bodyParser.raw())
 app.use(bodyParser.text())
 
 app.use(cors({
-    origin: '*'
+    origin: "*"
 }));
 
-const taskRoute = require('./src/routes/task.route');
-app.use('/api', taskRoute);
+const taskRoute = require("./src/routes/task.route");
+app.use("/api", taskRoute);
 
 const PORT = process.env.PORT || 3000;
 
