@@ -51,13 +51,18 @@ const deleteTask = async (req, res) => {
     }
 };
 
-// update task status
-const updateTaskStatus = async (req, res) => {
+// Update the task's category
+const updateTaskCategory = async (req, res) => {
     try {
-        const task = await Task.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true });
-        res.json(Response(false, "Task status updated successfully", task));
+        const task = await Task.findByIdAndUpdate(req.params.id, { category:  req.body.newCategory }, { new: true });
+
+        if (!task) {
+            return res.status(404).json(Response(true, "Task not found"));
+        }
+
+        res.json(Response(false, "Task category updated successfully", task));
     } catch (err) {
-        res.status(400).json(Response(true, "Error updating task status", err.message));
+        res.status(400).json(Response(true, "Error updating task category", err.message));
     }
 };
 
@@ -66,5 +71,5 @@ module.exports = {
     createTask,
     updateTask,
     deleteTask,
-    updateTaskStatus,
+    updateTaskCategory
 };
