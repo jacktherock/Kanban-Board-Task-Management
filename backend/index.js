@@ -17,7 +17,7 @@ app.use(cors({
 const taskRoute = require("./src/routes/task.route");
 app.use("/api", taskRoute);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 6010;
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
