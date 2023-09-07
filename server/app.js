@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 // const cors = require("cors");
 const app = express();
 require("dotenv").config()
-require("./src/DB/connection")
+// require("./src/DB/connection")
 const taskRoute = require("./src/routes/task.route");
 
 app.use(bodyParser.urlencoded({ extended: true }))
