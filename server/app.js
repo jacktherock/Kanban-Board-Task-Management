@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
+// const cors = require("cors");
 const app = express();
 require("dotenv").config()
 require("./src/DB/connection")
@@ -11,9 +11,9 @@ app.use(bodyParser.json())
 app.use(bodyParser.raw())
 app.use(bodyParser.text())
 
-app.use(cors({
-    origin: "*"
-}));
+// app.use(cors({
+//     origin: "*"
+// }));
 
 app.use("/api", taskRoute);
 app.get('/api/getdata',(req,res) => {
