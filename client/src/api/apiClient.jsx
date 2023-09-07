@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:9000/api/"
+// const BASE_URL = "http://127.0.0.1:9000/api/"
 // const BASE_URL = "https://task-management-backend-en5o.onrender.com/api/"
+const BASE_URL = "http://13.126.115.45/api/"
 
 const axiosClient = () => {
     return axios.create({

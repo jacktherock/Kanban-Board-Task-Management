@@ -16,9 +16,6 @@ app.use(cors({
 }));
 
 app.use("/api", taskRoute);
-app.get('/api/get',(req,res) =>{
-    res.send({nam:"sjhss"})
-})
 
 const PORT = process.env.PORT || 9000;
 
