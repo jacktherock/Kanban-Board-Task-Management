@@ -3,19 +3,19 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 require("dotenv").config()
-// require("./src/DB/connection")
-// const taskRoute = require("./src/routes/task.route");
+require("./src/DB/connection")
+const taskRoute = require("./src/routes/task.route");
 
-// app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(bodyParser.json())
-// app.use(bodyParser.raw())
-// app.use(bodyParser.text())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.use(bodyParser.raw())
+app.use(bodyParser.text())
 
-// app.use(cors({
-//     origin: "*"
-// }));
+app.use(cors({
+    origin: "*"
+}));
 
-// app.use("/api", taskRoute);
+app.use("/api", taskRoute);
 app.get('/api/get',(req,res) =>{
     res.send({nam:"sjhss"})
 })
