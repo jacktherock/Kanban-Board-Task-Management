@@ -2,7 +2,8 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
   build:
@@ -22,8 +23,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
+    - name: Change directory to server
+      run: cd server
+
     - name: Install dependencies
-      working-directory: server
       run: npm ci
 
     # Add more steps as needed for your build and test process within the "server" folder
