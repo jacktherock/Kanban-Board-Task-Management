@@ -8,22 +8,18 @@ const taskRoute = require("./src/routes/task.route");
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-// app.use(bodyParser.raw())
-// app.use(bodyParser.text())
+app.use(bodyParser.raw())
+app.use(bodyParser.text())
 
 app.use(cors({
     origin: "*"
 }));
 
 app.use("/api", taskRoute);
-app.get('/api/getdata',(req,res) => {
-    res.send({me:'hello '})
-})
 
-const PORT = process.env.PORT ;
-console.log(PORT)
+const PORT = process.env.PORT || 9000;
 
-app.listen(8000, () => {
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
 
